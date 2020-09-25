@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson1", "Lesson1\Lesson1.csproj", "{80D9C3F7-F6BC-43AE-8FC5-167FE0D934F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibForLesson1", "LibForLesson1\LibForLesson1.csproj", "{DA05549F-6CD0-48CF-9608-5845EC16F11A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel", "Excel\Excel.csproj", "{4FC5B7A5-2F84-45D7-AA04-988CDF854DFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{80D9C3F7-F6BC-43AE-8FC5-167FE0D934F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80D9C3F7-F6BC-43AE-8FC5-167FE0D934F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80D9C3F7-F6BC-43AE-8FC5-167FE0D934F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80D9C3F7-F6BC-43AE-8FC5-167FE0D934F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA05549F-6CD0-48CF-9608-5845EC16F11A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA05549F-6CD0-48CF-9608-5845EC16F11A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA05549F-6CD0-48CF-9608-5845EC16F11A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA05549F-6CD0-48CF-9608-5845EC16F11A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FC5B7A5-2F84-45D7-AA04-988CDF854DFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FC5B7A5-2F84-45D7-AA04-988CDF854DFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FC5B7A5-2F84-45D7-AA04-988CDF854DFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FC5B7A5-2F84-45D7-AA04-988CDF854DFD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {48BF8227-82C4-4600-9600-D48FCBB925F9}
+	EndGlobalSection
+EndGlobal
