@@ -10,11 +10,11 @@ namespace Lesson1
         static void Main(string[] args)
         {
 #if DEBUG            
-            var Url = "DEBUG";
+            var url = "DEBUG";
 #else
-            var Url = ConfigurationManager.AppSettings["SiteUrl"];
+            var url = ConfigurationManager.AppSettings["SiteUrl"];
 #endif
-            Helper.WriteText(Url);
+            Helper.WriteText(url);
 
 #region ReadLine
             Console.ReadLine();

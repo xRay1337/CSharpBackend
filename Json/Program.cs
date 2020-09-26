@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Json
 {
@@ -32,8 +31,8 @@ namespace Json
 
             var allCurrencyName = countries.SelectMany(country => country.Currencies)
                                             .Select(currency => currency.Name)
-                                            .Where(n => n != null)
                                             .Distinct()
+                                            .Where(name => name != null)
                                             .OrderBy(name => name);
 
             Console.WriteLine("Список валют:");
