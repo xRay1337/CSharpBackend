@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel", "Excel\Excel.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Json", "Json\Json.csproj", "{0AC5007C-D4B3-44D0-8148-EA9DD33A9E1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vectors", "Vectors\Vectors.csproj", "{77057734-01CC-42A6-809E-9FEDF1AAE6F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorsTests", "VectorsTests\VectorsTests.csproj", "{DD6C82A5-ADDE-49AB-8758-4B5F579ECE7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{0AC5007C-D4B3-44D0-8148-EA9DD33A9E1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AC5007C-D4B3-44D0-8148-EA9DD33A9E1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AC5007C-D4B3-44D0-8148-EA9DD33A9E1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77057734-01CC-42A6-809E-9FEDF1AAE6F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77057734-01CC-42A6-809E-9FEDF1AAE6F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77057734-01CC-42A6-809E-9FEDF1AAE6F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77057734-01CC-42A6-809E-9FEDF1AAE6F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD6C82A5-ADDE-49AB-8758-4B5F579ECE7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD6C82A5-ADDE-49AB-8758-4B5F579ECE7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD6C82A5-ADDE-49AB-8758-4B5F579ECE7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD6C82A5-ADDE-49AB-8758-4B5F579ECE7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
