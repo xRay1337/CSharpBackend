@@ -12,32 +12,32 @@ namespace ShopApp
             var connectionString = ConfigurationManager.ConnectionStrings["ShopConnection"].ToString();
 
             var getProductsCount = "SELECT COUNT(*) FROM [SHOP].[PRODUCTS]";
-            var productsCount = (int)DataBase.ExecuteScalar(getProductsCount, connectionString);
+            var productsCount = (int)DataBase.Execute(getProductsCount, connectionString, SqlOperation.ExecuteScalar);
             Console.WriteLine($"Кол-во товаров: {productsCount}");
 
             var getCategoriesCount = "SELECT COUNT(*) FROM [SHOP].[CATEGORIES]";
-            var categoriesCount = (int)DataBase.ExecuteScalar(getCategoriesCount, connectionString);
+            var categoriesCount = (int)DataBase.Execute(getCategoriesCount, connectionString, SqlOperation.ExecuteScalar);
 
             //Вставка новой категории
             var newCategoryId = categoriesCount + 1;
             var addNewCategory = $"INSERT INTO [SHOP].[CATEGORIES] ([NAME]) VALUES ('Category {newCategoryId}')";
-            DataBase.ExecuteNonQuery(addNewCategory, connectionString);
+            DataBase.Execute(addNewCategory, connectionString, SqlOperation.ExecuteNonQuery);
             Console.WriteLine($"Добавлена категория: Category {categoriesCount}");
 
             //Вставка нового продукта
             var newProductId = productsCount + 1;
             var addNewProduct = $"INSERT INTO [SHOP].[PRODUCTS] ([CATEGORY_ID], [NAME]) VALUES ({newCategoryId}, 'Product {newProductId}')";
-            DataBase.ExecuteNonQuery(addNewProduct, connectionString);
+            DataBase.Execute(addNewProduct, connectionString, SqlOperation.ExecuteNonQuery);
             Console.WriteLine($"Добавлен продукт: Product {newProductId}");
 
             //Обновление нового продукта
             var updateNewProduct = $"UPDATE [SHOP].[PRODUCTS] SET [NAME] = 'To remove' WHERE [NAME] = 'Product {newProductId}'";
-            DataBase.ExecuteNonQuery(updateNewProduct, connectionString);
+            DataBase.Execute(updateNewProduct, connectionString, SqlOperation.ExecuteNonQuery);
             Console.WriteLine($"Обновлён продукт: Product {newProductId}");
 
             //Удаление нового продукта
             var dateteNewProduct = $"DELETE FROM [SHOP].[PRODUCTS] WHERE [NAME] = 'To remove'";
-            DataBase.ExecuteNonQuery(dateteNewProduct, connectionString);
+            DataBase.Execute(dateteNewProduct, connectionString, SqlOperation.ExecuteNonQuery);
             Console.WriteLine($"Удалён продукт: Product {newProductId}");
 
             var selectProducts = @" SELECT TOP(10)
@@ -45,7 +45,7 @@ namespace ShopApp
                                             [P].[NAME] AS [PRODUCT_NAME],
 		                                    [C].[NAME] AS [CATEGORY_NAME]
                                     FROM [SHOP].[PRODUCTS] AS[P]
-                                    JOIN [SHOP].[CATEGORIES] AS [C]
+                                    INNER JOIN [SHOP].[CATEGORIES] AS [C]
                                     ON [P].[CATEGORY_ID] = [C].[ID]
                                     ORDER BY [PRODUCT_ID]";
 
@@ -68,25 +68,13 @@ namespace ShopApp
             }
 
             Console.WriteLine("Выгрузить весь список товаров вместе с именами категорий в DataSet через SqlDataAdapter, и распечатайте все данные в цикле:");
-            using (var connection = new SqlConnection(connectionString))
+            var productsTable = (DataTable)DataBase.Execute(selectProducts, connectionString, SqlOperation.ExecuteDataTable);
+
+            Console.WriteLine($"[{productsTable.Columns[0].ColumnName}] \t [{productsTable.Columns[1].ColumnName}] \t\t [{productsTable.Columns[2].ColumnName}]");
+
+            foreach (DataRow productsRow in productsTable.Rows)
             {
-                connection.Open();
-
-                using (var command = new SqlCommand(selectProducts, connection))
-                {
-                    var sqlDataAdapter = new SqlDataAdapter(selectProducts, connection);
-                    var products = new DataSet();
-                    sqlDataAdapter.Fill(products, "Products");
-
-                    var productsTable = products.Tables["Products"];
-
-                    Console.WriteLine($"[{productsTable.Columns[0].ColumnName}] \t [{productsTable.Columns[1].ColumnName}] \t\t [{productsTable.Columns[2].ColumnName}]");
-
-                    foreach (DataRow productsRow in products.Tables["Products"].Rows)
-                    {
-                        Console.WriteLine("ID: {0}   \t Product: {1}     \t Category: {2}", productsRow[0], productsRow[1], productsRow[2]);
-                    }
-                }
+                Console.WriteLine($"ID: {productsRow[0]}   \t Product: {productsRow[1]}     \t Category: {productsRow[2]}");
             }
 
             Console.ReadKey();
