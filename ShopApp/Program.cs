@@ -77,6 +77,37 @@ namespace ShopApp
                 Console.WriteLine($"ID: {productsRow[0]}   \t Product: {productsRow[1]}     \t Category: {productsRow[2]}");
             }
 
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var insertNewCategoryAndProduct = connection.BeginTransaction(); 
+                try
+                {
+                    var insertCategory = "INSERT INTO [SHOP].[CATEGORIES] ([NAME]) VALUES (CONCAT('Category ', @categoryId))"; ;
+                    var insertNewCategory = new SqlCommand(insertCategory, connection);
+                    insertNewCategory.Parameters.Add(new SqlParameter("@categoryId", newCategoryId + 1) { SqlDbType = SqlDbType.Int });
+                    insertNewCategory.Transaction = insertNewCategoryAndProduct;
+                    insertNewCategory.ExecuteNonQuery();
+
+                    //throw new Exception();
+
+                    var insertProduct = "INSERT INTO [SHOP].[PRODUCTS] ([CATEGORY_ID], [NAME]) VALUES (@categoryId, CONCAT('Product ', @productId))";
+                    var insertNewProduct = new SqlCommand(insertProduct, connection);
+                    insertNewProduct.Parameters.Add(new SqlParameter("@categoryId", newCategoryId) { SqlDbType = SqlDbType.Int });
+                    insertNewProduct.Parameters.Add(new SqlParameter("@productId", newProductId) { SqlDbType = SqlDbType.Int });
+                    insertNewProduct.Transaction = insertNewCategoryAndProduct;
+                    insertNewProduct.ExecuteNonQuery();
+
+                    insertNewCategoryAndProduct.Commit();
+                    Console.WriteLine("Транзакция успешно завершена");
+                }
+                catch (Exception ex)
+                {
+                    insertNewCategoryAndProduct.Rollback();
+                    Console.WriteLine($"Откат транзакции: {ex.Message}");
+                }
+
+            }
             Console.ReadKey();
         }
     }
