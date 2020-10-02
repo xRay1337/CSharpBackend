@@ -13,21 +13,22 @@ namespace Json
     {
         static void Main(string[] args)
         {
-            string jsonText;
-            var countries = new List<Country>();
             var logger = LogManager.GetCurrentClassLogger();
-
             logger.Trace("Приложение запущено");
+
+            var countries = new List<Country>();
 
             try
             {
                 var uri = new Uri("https://restcountries.eu/rest/v2/region/americas");
-                logger.Trace("Подключение к ресурсу: " + uri.ToString());
+                logger.Trace("Подключение к ресурсу: " + uri);
                 var request = WebRequest.Create(uri);
                 logger.Trace("Ожидание ответа");
                 var response = request.GetResponse();
 
                 logger.Trace("Чтение ответа");
+                string jsonText;
+
                 using (var stream = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
                 {
                     jsonText = stream.ReadToEnd();
@@ -59,13 +60,12 @@ namespace Json
 
             logger.Trace("Подготовка списка валют");
             var allCurrencyName = countries.SelectMany(country => country.Currencies)
+                                            .Where(c => c != null && c.Name != null)
                                             .Select(currency => currency.Name)
                                             .Distinct()
-                                            .Where(name => name != null)
                                             .OrderBy(name => name);
 
             Console.WriteLine("Список валют:");
-
             foreach (var currencyName in allCurrencyName)
             {
                 Console.WriteLine(currencyName);
