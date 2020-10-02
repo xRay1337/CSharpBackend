@@ -59,14 +59,14 @@ namespace Json
             Console.WriteLine($"Сумма по странам: {sum}");
 
             logger.Trace("Подготовка списка валют");
-            var allCurrencyName = countries.SelectMany(country => country.Currencies)
+            var allCurrenciesName = countries.SelectMany(country => country.Currencies)
                                             .Where(c => c != null && c.Name != null)
                                             .Select(currency => currency.Name)
                                             .Distinct()
                                             .OrderBy(name => name);
 
             Console.WriteLine("Список валют:");
-            foreach (var currencyName in allCurrencyName)
+            foreach (var currencyName in allCurrenciesName)
             {
                 Console.WriteLine(currencyName);
             }
