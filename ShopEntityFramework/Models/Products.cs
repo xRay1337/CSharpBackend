@@ -15,11 +15,7 @@ namespace ShopEntityFramework.Models
 
         public double? Price { get; set; }
 
-        public virtual ICollection<Category> Categories { get; set; }
-
-        public Product()
-        {
-        }
+        public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
 
         public Product(int сategoryId, string name, double? price = null)
         {

@@ -26,7 +26,7 @@ namespace ShopEntityFramework.Models
         [MaxLength(255)]
         public string Email { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
         public Customer(string lastName, string firstName, string middleName, string phoneNumber, string email)
         {
