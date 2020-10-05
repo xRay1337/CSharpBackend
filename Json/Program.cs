@@ -37,19 +37,19 @@ namespace Json
                 logger.Trace("Десериализации ответа");
                 countries = JsonConvert.DeserializeObject<List<Country>>(jsonText);
             }
-            catch (WebException e)
+            catch (WebException ex)
             {
-                logger.Error("Ошибка на WEB уровне " + e.Message);
+                logger.Error(ex, "Ошибка на WEB уровне.");
                 throw;
             }
-            catch (IOException e)
+            catch (IOException ex)
             {
-                logger.Error("Ошибка на Stream уровне " + e.Message);
+                logger.Error(ex, "Ошибка на Stream уровне.");
                 throw;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                logger.Error(e.Message);
+                logger.Error(ex);
                 throw;
             }
 

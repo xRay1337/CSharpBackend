@@ -21,6 +21,12 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ShopDataBase", "ShopDataBas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopEntityFramework", "ShopEntityFramework\ShopEntityFramework.csproj", "{95BF5264-B748-45E5-B90D-89FC159067C6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSCourseML.Model", "CSCourseML.Model\CSCourseML.Model.csproj", "{34D7A118-D1C0-4588-8D85-16124EF8FF97}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSCourseML.ConsoleApp", "CSCourseML.ConsoleApp\CSCourseML.ConsoleApp.csproj", "{AB68E36C-E684-45C6-AC99-20F0667CB785}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCourceTaxiPricePrediction", "CSCourceTaxiPricePrediction\CSCourceTaxiPricePrediction.csproj", "{90A78AEE-7E74-4289-B938-050459796F8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +71,18 @@ Global
 		{95BF5264-B748-45E5-B90D-89FC159067C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95BF5264-B748-45E5-B90D-89FC159067C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95BF5264-B748-45E5-B90D-89FC159067C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34D7A118-D1C0-4588-8D85-16124EF8FF97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34D7A118-D1C0-4588-8D85-16124EF8FF97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34D7A118-D1C0-4588-8D85-16124EF8FF97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34D7A118-D1C0-4588-8D85-16124EF8FF97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB68E36C-E684-45C6-AC99-20F0667CB785}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB68E36C-E684-45C6-AC99-20F0667CB785}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB68E36C-E684-45C6-AC99-20F0667CB785}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB68E36C-E684-45C6-AC99-20F0667CB785}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90A78AEE-7E74-4289-B938-050459796F8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90A78AEE-7E74-4289-B938-050459796F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90A78AEE-7E74-4289-B938-050459796F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90A78AEE-7E74-4289-B938-050459796F8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
