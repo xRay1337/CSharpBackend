@@ -11,8 +11,8 @@ namespace ShopApp
         {
             var connectionString = ConfigurationManager.ConnectionStrings["ShopConnection"].ToString();
 
-            var getProductsCountQuery = @"  SELECT COUNT(*)
-                                            FROM [Shop].[Products]";
+            var getProductsCountQuery = @"SELECT COUNT(*)
+                                          FROM [Shop].[Products]";
             var selectProductsCountCmd = new SqlCommand(getProductsCountQuery);
             var productsCount = (int)Database.ExecuteScalar(selectProductsCountCmd, connectionString);
             Console.WriteLine($"Кол-во товаров: {productsCount}");
@@ -24,8 +24,8 @@ namespace ShopApp
 
             //Вставка новой категории
             var newCategoryId = categoriesCount + 1;
-            var insertNewCategoryQuery = @" INSERT INTO [Shop].[Categories] ([Name])
-                                            VALUES (CONCAT('Category ', @newCategoryId))";
+            var insertNewCategoryQuery = @"INSERT INTO [Shop].[Categories] ([Name])
+                                           VALUES (CONCAT('Category ', @newCategoryId))";
             var insertNewCategoryCmd = new SqlCommand(insertNewCategoryQuery);
             insertNewCategoryCmd.Parameters.Add(new SqlParameter("@newCategoryId", newCategoryId) { SqlDbType = SqlDbType.Int });
             Database.ExecuteNonQuery(insertNewCategoryCmd, connectionString);
@@ -33,8 +33,8 @@ namespace ShopApp
 
             //Вставка нового продукта
             var newProductId = productsCount + 1;
-            var insertNewProductQuery = @"  INSERT INTO [Shop].[Products] ([CategoryId], [Name])
-                                            VALUES (@newCategoryId, CONCAT('Product ', @newProductId))";
+            var insertNewProductQuery = @"INSERT INTO [Shop].[Products] ([CategoryId], [Name])
+                                          VALUES (@newCategoryId, CONCAT('Product ', @newProductId))";
             var insertNewProductCmd = new SqlCommand(insertNewProductQuery);
             insertNewProductCmd.Parameters.Add(new SqlParameter("@newCategoryId", newCategoryId) { SqlDbType = SqlDbType.Int });
             insertNewProductCmd.Parameters.Add(new SqlParameter("@newProductId", newProductId) { SqlDbType = SqlDbType.Int });
@@ -42,9 +42,9 @@ namespace ShopApp
             Console.WriteLine($"Добавлен продукт: Product {newProductId}");
 
             //Обновление нового продукта
-            var updateNewProductQuery = @"  UPDATE [Shop].[Products]
-                                            SET [Name] = @newValue
-                                            WHERE [Name] = CONCAT('Product ', @newProductId)";
+            var updateNewProductQuery = @"UPDATE [Shop].[Products]
+                                          SET [Name] = @newValue
+                                          WHERE [Name] = CONCAT('Product ', @newProductId)";
             var updateNewProductCmd = new SqlCommand(updateNewProductQuery);
             updateNewProductCmd.Parameters.Add(new SqlParameter("@newProductId", newProductId) { SqlDbType = SqlDbType.Int });
             updateNewProductCmd.Parameters.Add(new SqlParameter("@newValue", "To remove") { SqlDbType = SqlDbType.NVarChar });
@@ -52,21 +52,21 @@ namespace ShopApp
             Console.WriteLine($"Обновлён продукт: Product {newProductId}");
 
             //Удаление нового продукта
-            var dateteNewProductQuery = @"  DELETE FROM [Shop].[Products]
-                                            WHERE [Name] = @value";
+            var dateteNewProductQuery = @"DELETE FROM [Shop].[Products]
+                                          WHERE [Name] = @value";
             var dateteNewProductCmd = new SqlCommand(dateteNewProductQuery);
             dateteNewProductCmd.Parameters.Add(new SqlParameter("@value", "To remove") { SqlDbType = SqlDbType.NVarChar });
             Database.ExecuteNonQuery(dateteNewProductCmd, connectionString);
             Console.WriteLine($"Удалён продукт: Product {newProductId}");
 
-            var selectProducts = @" SELECT TOP(10)
-                                            [P].[Id] AS [ProductId],
-                                            [P].[Name] AS [ProductName],
-		                                    [C].[Name] AS [CategoryName]
-                                    FROM [Shop].[Products] AS [P]
-                                    INNER JOIN [Shop].[Categories] AS [C]
-                                    ON [P].[CategoryId] = [C].[Id]
-                                    ORDER BY [ProductId]";
+            var selectProducts = @"SELECT TOP(10)
+                                   [P].[Id] AS [ProductId],
+                                   [P].[Name] AS [ProductName],
+		                           [C].[Name] AS [CategoryName]
+                                   FROM [Shop].[Products] AS [P]
+                                   INNER JOIN [Shop].[Categories] AS [C]
+                                   ON [P].[CategoryId] = [C].[Id]
+                                   ORDER BY [ProductId]";
 
             Console.WriteLine("Выгрузить весь список товаров вместе с именами категорий через reader, и распечатайте все данные в цикле:");
             using (var connection = new SqlConnection(connectionString))
@@ -103,8 +103,8 @@ namespace ShopApp
                 var insertNewCategoryAndProduct = connection.BeginTransaction();
                 try
                 {
-                    var insertCategory = @" INSERT INTO [Shop].[Categories] ([Name])
-                                            VALUES (CONCAT('Category ', @categoryId))"; ;
+                    var insertCategory = @"INSERT INTO [Shop].[Categories] ([Name])
+                                           VALUES (CONCAT(N'Category ', @categoryId))";
                     var insertNewCategory = new SqlCommand(insertCategory, connection);
                     insertNewCategory.Parameters.Add(new SqlParameter("@categoryId", newCategoryId + 1) { SqlDbType = SqlDbType.Int });
                     insertNewCategory.Transaction = insertNewCategoryAndProduct;
@@ -112,8 +112,8 @@ namespace ShopApp
 
                     //throw new Exception();
 
-                    var insertProduct = @"  INSERT INTO [Shop].[Products] ([CategoryId], [Name])
-                                            VALUES (@categoryId, CONCAT('Product ', @productId))";
+                    var insertProduct = @"INSERT INTO [Shop].[Products] ([CategoryId], [Name])
+                                          VALUES (@categoryId, CONCAT(N'Product ', @productId))";
                     var insertNewProduct = new SqlCommand(insertProduct, connection);
                     insertNewProduct.Parameters.Add(new SqlParameter("@categoryId", newCategoryId) { SqlDbType = SqlDbType.Int });
                     insertNewProduct.Parameters.Add(new SqlParameter("@productId", newProductId) { SqlDbType = SqlDbType.Int });
@@ -129,6 +129,7 @@ namespace ShopApp
                     Console.WriteLine($"Откат транзакции: {ex.Message}");
                 }
             }
+
             Console.ReadKey();
         }
     }
