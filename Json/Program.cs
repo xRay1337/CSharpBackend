@@ -16,7 +16,7 @@ namespace Json
             var logger = LogManager.GetCurrentClassLogger();
             logger.Trace("Приложение запущено");
 
-            var countries = new List<Country>();
+            List<Country> countries;
 
             try
             {
@@ -60,7 +60,7 @@ namespace Json
 
             logger.Trace("Подготовка списка валют");
             var allCurrenciesName = countries.SelectMany(country => country.Currencies)
-                                            .Where(c => c != null && c.Name != null)
+                                            .Where(c => c != null && c.Name != null && c.Code != null)
                                             .Select(currency => currency.Name)
                                             .Distinct()
                                             .OrderBy(name => name);
