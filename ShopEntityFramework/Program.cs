@@ -1,49 +1,47 @@
-﻿using ShopEntityFramework.Models;
-using System;
-using System.Data.Entity;
+﻿using System;
 using System.Linq;
-using System.Threading;
 
 namespace ShopEntityFramework
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        internal static void Main()
         {
             using (var db = new ShopContext())
             {
-                //Найти самый часто покупаемый товар
+                // Найти самый часто покупаемый товар
                 var topProduct = db.Orders
                     .AsNoTracking()
-                    .Select(o => o.Product)
-                    .GroupBy(p => p.Name)
-                    .Select(group => new { Name = group.Key, Count = group.Count() })
-                    .OrderByDescending(p => p.Count)
-                    .Select(p => p.Name)
+                    .GroupBy(o => o.Product.Name)
+                    .OrderByDescending(g => g.Count())
+                    .Select(n => n.Key)
                     .FirstOrDefault();
 
                 Console.WriteLine($"Хит продаж: {topProduct}");
 
                 Console.WriteLine();
 
-                //Найти сколько каждый клиент потратил денег за все время
+                // Найти сколько каждый клиент потратил денег за все время
                 var spending = db.Orders
                     .AsNoTracking()
-                    .Select(o => new { LastName = o.Customer.LastName, Amount = o.Product.Price })
-                    .GroupBy(ln => ln.LastName, a => a.Amount)
-                    .Select(group => new { LastName = group.Key, Amount = group.Sum(a => a.Value) })
+                    .GroupBy(Id => Id.Customer.Id, a => a.Product.Price)
+                    .Select(group => new { CustomerId = group.Key, Amount = group.Sum(a => a.Value) })
+                    .Join(db.Customers,
+                        o => o.CustomerId,
+                        c => c.Id,
+                        (o, c) => new { c.LastName, o.Amount })
                     .OrderByDescending(c => c.Amount)
                     .ThenBy(c => c.LastName)
                     .ToArray();
 
                 foreach (var s in spending)
                 {
-                    Console.WriteLine($"Сумма покупок: {s.Amount.ToString().PadLeft(7, '0')}\t{s.LastName}");
+                    Console.WriteLine($"Сумма покупок: {s.Amount.ToString().PadLeft(7, '0')} р. {s.LastName}");
                 }
 
                 Console.WriteLine();
 
-                //Вывести сколько товаров каждой категории купили
+                // Вывести сколько товаров каждой категории купили
                 var salesByCategory = db.Orders
                     .AsNoTracking()
                     .SelectMany(o => o.Product.Categories)
@@ -58,6 +56,7 @@ namespace ShopEntityFramework
                     Console.WriteLine($"Кол-во продаж: {s.Count.ToString().PadLeft(7, '0')}\t{s.Name}");
                 }
             }
+
             Console.ReadKey();
         }
     }

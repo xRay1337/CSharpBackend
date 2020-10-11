@@ -57,12 +57,12 @@
   <ItemGroup>
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\Products.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\ShopContextInitializer.cs" />
+    <Compile Include="ShopContextInitializer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\ShopContext.cs" />
+    <Compile Include="ShopContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

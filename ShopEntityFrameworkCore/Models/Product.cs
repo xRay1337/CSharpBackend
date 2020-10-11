@@ -1,25 +1,23 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace ShopEntityFramework.Models
+namespace ShopEntityFrameworkCore.Models
 {
     public class Product
     {
         public int Id { get; set; }
 
-        public int CategoryId { get; set; }
-
-        [Required]
-        [MaxLength(50)]
         public string Name { get; set; }
 
         public double? Price { get; set; }
 
-        public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
+        public List<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
 
-        public Product(int сategoryId, string name, double? price = null)
+        public Product()
         {
-            CategoryId = сategoryId;
+        }
+
+        public Product(string name, double? price)
+        {
             Name = name;
             Price = price;
         }

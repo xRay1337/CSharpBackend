@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSCourseML.Model", "CSCours
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSCourseML.ConsoleApp", "CSCourseML.ConsoleApp\CSCourseML.ConsoleApp.csproj", "{AB68E36C-E684-45C6-AC99-20F0667CB785}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCourceTaxiPricePrediction", "CSCourceTaxiPricePrediction\CSCourceTaxiPricePrediction.csproj", "{90A78AEE-7E74-4289-B938-050459796F8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSCourceTaxiPricePrediction", "CSCourceTaxiPricePrediction\CSCourceTaxiPricePrediction.csproj", "{90A78AEE-7E74-4289-B938-050459796F8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopEntityFrameworkCore", "ShopEntityFrameworkCore\ShopEntityFrameworkCore.csproj", "{5E515973-70B5-48A6-AF11-78F1D77AAB3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,10 @@ Global
 		{90A78AEE-7E74-4289-B938-050459796F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90A78AEE-7E74-4289-B938-050459796F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90A78AEE-7E74-4289-B938-050459796F8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E515973-70B5-48A6-AF11-78F1D77AAB3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E515973-70B5-48A6-AF11-78F1D77AAB3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E515973-70B5-48A6-AF11-78F1D77AAB3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E515973-70B5-48A6-AF11-78F1D77AAB3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

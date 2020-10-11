@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ShopEntityFramework.Models
+namespace ShopEntityFrameworkCore.Models
 {
     public class Category
     {
@@ -8,7 +8,11 @@ namespace ShopEntityFramework.Models
 
         public string Name { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+        public List<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
+
+        public Category()
+        {
+        }
 
         public Category(string name)
         {

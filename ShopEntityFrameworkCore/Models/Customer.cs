@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ShopEntityFramework.Models
+namespace ShopEntityFrameworkCore.Models
 {
     public class Customer
     {

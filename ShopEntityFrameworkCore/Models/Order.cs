@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ShopEntityFramework.Models
+namespace ShopEntityFrameworkCore.Models
 {
     public class Order
     {
