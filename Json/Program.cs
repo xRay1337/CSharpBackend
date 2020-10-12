@@ -9,9 +9,9 @@ using System.Text;
 
 namespace Json
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             var logger = LogManager.GetCurrentClassLogger();
             logger.Trace("Приложение запущено");
@@ -39,17 +39,17 @@ namespace Json
             }
             catch (WebException ex)
             {
-                logger.Error(ex, "Ошибка на WEB уровне.");
+                logger.Error($"\r\nType: {ex};\r\nStackTrace: {ex.StackTrace};\r\nInnerException: {ex.InnerException}");
                 throw;
             }
             catch (IOException ex)
             {
-                logger.Error(ex, "Ошибка на Stream уровне.");
+                logger.Error($"\r\nType: {ex};\r\nStackTrace: {ex.StackTrace};\r\nInnerException: {ex.InnerException}");
                 throw;
             }
             catch (Exception ex)
             {
-                logger.Error(ex);
+                logger.Error($"\r\nType: {ex};\r\nStackTrace: {ex.StackTrace};\r\nInnerException: {ex.InnerException}");
                 throw;
             }
 
@@ -60,7 +60,7 @@ namespace Json
 
             logger.Trace("Подготовка списка валют");
             var allCurrenciesName = countries.SelectMany(country => country.Currencies)
-                                            .Where(c => c != null && c.Name != null && c.Code != null)
+                                            .Where(c => c?.Name != null && c.Code != null)
                                             .Select(currency => currency.Name)
                                             .Distinct()
                                             .OrderBy(name => name);
