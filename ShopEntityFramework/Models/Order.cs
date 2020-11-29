@@ -10,17 +10,20 @@ namespace ShopEntityFramework.Models
 
         public int ProductId { get; set; }
 
+        public int Count { get; set; }
+
         public DateTime DateTime { get; set; }
 
         public virtual Customer Customer { get; set; }
 
         public virtual Product Product { get; set; }
 
-        public Order(int customerId, int productId, DateTime dateTime)
+        public Order(int customerId, int productId, int count)
         {
             CustomerId = customerId;
             ProductId = productId;
-            DateTime = dateTime;
+            Count = count;
+            DateTime = DateTime.Now;
         }
     }
 }

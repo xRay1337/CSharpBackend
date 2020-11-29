@@ -10,17 +10,18 @@ namespace ShopEntityFramework.Models
 
         public double? Price { get; set; }
 
-        public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
+        public virtual ICollection<CategoryProduct> CategoryProducts { get; set; } = new List<CategoryProduct>();
+
+        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
         public Product()
         {
         }
 
-        public Product(string name, double? price, Category[] categories)
+        public Product(string name, double? price)
         {
             Name = name;
             Price = price;
-            Categories = categories;
         }
 
         public override string ToString()

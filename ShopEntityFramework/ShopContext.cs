@@ -18,6 +18,8 @@ namespace ShopEntityFramework
 
         public virtual DbSet<Product> Products { get; set; }
 
+        public virtual DbSet<CategoryProduct> CategoryProducts { get; set; }
+
         public virtual DbSet<Customer> Customers { get; set; }
 
         public virtual DbSet<Order> Orders { get; set; }
@@ -28,20 +30,27 @@ namespace ShopEntityFramework
 
             modelBuilder.Entity<Customer>().Property(c => c.LastName).HasMaxLength(50).IsRequired();
             modelBuilder.Entity<Customer>().Property(c => c.FirstName).HasMaxLength(50).IsRequired();
-            modelBuilder.Entity<Customer>().Property(c => c.MiddleName).HasMaxLength(50).IsOptional();
+            modelBuilder.Entity<Customer>().Property(c => c.MiddleName).HasMaxLength(50);
             modelBuilder.Entity<Customer>().Property(c => c.PhoneNumber).HasMaxLength(11).IsRequired();
             modelBuilder.Entity<Customer>().Property(c => c.Email).HasMaxLength(255).IsRequired();
 
             modelBuilder.Entity<Product>().Property(p => p.Name).HasMaxLength(50).IsRequired();
 
             modelBuilder.Entity<Product>()
-                .HasMany(c => c.Categories)
-                .WithMany(p => p.Products)
-                .Map(m =>
-                {
-                    m.MapLeftKey("ProductId");
-                    m.MapRightKey("CategoryId");
-                });
+                .HasMany(p => p.CategoryProducts)
+                .WithRequired(cp => cp.Product);
+
+            modelBuilder.Entity<Product>()
+                .HasMany(p => p.Orders)
+                .WithRequired(o => o.Product);
+
+            modelBuilder.Entity<Category>()
+                .HasMany(c => c.CategoryProducts)
+                .WithRequired(cp => cp.Category);
+
+            modelBuilder.Entity<Customer>()
+                .HasMany(c => c.Orders)
+                .WithRequired(o => o.Customer);
 
             base.OnModelCreating(modelBuilder);
         }

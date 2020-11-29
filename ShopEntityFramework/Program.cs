@@ -11,10 +11,10 @@ namespace ShopEntityFramework
             {
                 // Найти самый часто покупаемый товар
                 var topProduct = db.Orders
-                    .AsNoTracking()
                     .GroupBy(o => o.Product.Name)
-                    .OrderByDescending(g => g.Count())
-                    .Select(n => n.Key)
+                    .Select(g => new { Name = g.Key, Count = g.Sum(s => s.Count) })
+                    .OrderByDescending(p => p.Count)
+                    .Select(p => p.Name)
                     .FirstOrDefault();
 
                 Console.WriteLine($"Хит продаж: {topProduct}");
@@ -22,14 +22,9 @@ namespace ShopEntityFramework
                 Console.WriteLine();
 
                 // Найти сколько каждый клиент потратил денег за все время
-                var spending = db.Orders
-                    .AsNoTracking()
-                    .GroupBy(Id => Id.Customer.Id, a => a.Product.Price)
-                    .Select(group => new { CustomerId = group.Key, Amount = group.Sum(a => a.Value) })
-                    .Join(db.Customers,
-                        o => o.CustomerId,
-                        c => c.Id,
-                        (o, c) => new { c.LastName, o.Amount })
+                var spending = db.Customers
+                    .GroupBy(c => c.LastName, c => c.Orders.Sum(a => a.Count * a.Product.Price ?? 0))
+                    .Select(g => new { LastName = g.Key, Amount = g.Sum(a => a)})
                     .OrderByDescending(c => c.Amount)
                     .ThenBy(c => c.LastName)
                     .ToArray();
@@ -43,17 +38,15 @@ namespace ShopEntityFramework
 
                 // Вывести сколько товаров каждой категории купили
                 var salesByCategory = db.Orders
-                    .AsNoTracking()
-                    .SelectMany(o => o.Product.Categories)
-                    .GroupBy(c => c.Name)
-                    .Select(group => new { Name = group.Key, Count = group.Count() })
+                    .GroupBy(n => n.Product.Name, c => c.Count)
+                    .Select(g => new { ProductName = g.Key, Count = g.Sum(c => c) })
                     .OrderByDescending(c => c.Count)
-                    .ThenBy(c => c.Name)
+                    .ThenBy(c => c.ProductName)
                     .ToArray();
 
                 foreach (var s in salesByCategory)
                 {
-                    Console.WriteLine($"Кол-во продаж: {s.Count.ToString().PadLeft(7, '0')}\t{s.Name}");
+                    Console.WriteLine($"Кол-во продаж: {s.Count.ToString().PadLeft(7, '0')}\t{s.ProductName}");
                 }
             }
 
