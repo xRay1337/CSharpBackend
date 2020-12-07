@@ -12,8 +12,6 @@ namespace ShopEntityFramework
             var videoCards = context.Categories.Add(new Category("Видеокарты"));
             var randomAccessMemory = context.Categories.Add(new Category("Оперативная память"));
 
-            context.SaveChanges();
-
             var processor1 = context.Products.Add(new Product("Intel Core i5 Coffee Lake", 11_999));
             var processor2 = context.Products.Add(new Product("Intel Xeon Platinum Skylake", 199_628));
             var processor3 = context.Products.Add(new Product("Intel Core i3-9100F", 6_290));
@@ -36,7 +34,6 @@ namespace ShopEntityFramework
 
             context.SaveChanges();
 
-            context.CategoryProducts.Add(new CategoryProduct(processors, processor1));
             context.CategoryProducts.Add(new CategoryProduct(processors, processor1));
             context.CategoryProducts.Add(new CategoryProduct(processors, processor2));
             context.CategoryProducts.Add(new CategoryProduct(processors, processor3));

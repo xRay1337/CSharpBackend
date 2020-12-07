@@ -10,21 +10,18 @@ namespace ShopEntityFramework
             using (var db = new ShopContext())
             {
                 // Найти самый часто покупаемый товар
-                var topProduct = db.Orders
-                    .GroupBy(o => o.Product.Name)
-                    .Select(g => new { Name = g.Key, Count = g.Sum(s => s.Count) })
+                var topProduct = db.Products
+                    .Select(p => new { p.Name, Count = p.Orders.Sum(o => o.Count) })
                     .OrderByDescending(p => p.Count)
-                    .Select(p => p.Name)
                     .FirstOrDefault();
 
-                Console.WriteLine($"Хит продаж: {topProduct}");
+                Console.WriteLine($"Хит продаж: {topProduct.Name}");
 
                 Console.WriteLine();
 
                 // Найти сколько каждый клиент потратил денег за все время
                 var spending = db.Customers
-                    .GroupBy(c => c.LastName, c => c.Orders.Sum(a => a.Count * a.Product.Price ?? 0))
-                    .Select(g => new { LastName = g.Key, Amount = g.Sum(a => a)})
+                    .Select(c => new { c.LastName, Amount = c.Orders.Sum(o => o.Count * o.Product.Price ?? 0) })
                     .OrderByDescending(c => c.Amount)
                     .ThenBy(c => c.LastName)
                     .ToArray();
@@ -37,16 +34,15 @@ namespace ShopEntityFramework
                 Console.WriteLine();
 
                 // Вывести сколько товаров каждой категории купили
-                var salesByCategory = db.Orders
-                    .GroupBy(n => n.Product.Name, c => c.Count)
-                    .Select(g => new { ProductName = g.Key, Count = g.Sum(c => c) })
+                var salesByCategory = db.Categories
+                    .Select(c => new { c.Name, Count = c.CategoryProducts.Sum(p => p.Product.Orders.Sum(o => o.Count)) })
                     .OrderByDescending(c => c.Count)
-                    .ThenBy(c => c.ProductName)
+                    .ThenBy(c => c.Name)
                     .ToArray();
 
                 foreach (var s in salesByCategory)
                 {
-                    Console.WriteLine($"Кол-во продаж: {s.Count.ToString().PadLeft(7, '0')}\t{s.ProductName}");
+                    Console.WriteLine($"Кол-во продаж: {s.Count.ToString().PadLeft(7, '0')}\t{s.Name}");
                 }
             }
 

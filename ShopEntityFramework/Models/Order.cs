@@ -12,7 +12,7 @@ namespace ShopEntityFramework.Models
 
         public int Count { get; set; }
 
-        public DateTime DateTime { get; set; }
+        public DateTime OrderDate { get; set; }
 
         public virtual Customer Customer { get; set; }
 
@@ -23,7 +23,7 @@ namespace ShopEntityFramework.Models
             CustomerId = customerId;
             ProductId = productId;
             Count = count;
-            DateTime = DateTime.Now;
+            OrderDate = DateTime.UtcNow;
         }
     }
 }
