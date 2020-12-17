@@ -12,7 +12,7 @@ namespace ShopEntityFramework.Models
 
         public int Count { get; set; }
 
-        public DateTime OrderDate { get; set; }
+        public DateTimeOffset OrderDate { get; set; }
 
         public virtual Customer Customer { get; set; }
 

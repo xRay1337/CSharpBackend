@@ -36,9 +36,6 @@ namespace ShopEntityFramework
 
             modelBuilder.Entity<Product>().Property(p => p.Name).HasMaxLength(50).IsRequired();
 
-            modelBuilder.Entity<Order>().Property(p => p.OrderDate).HasColumnType("datetime2");
-            //modelBuilder.Entity<Order>().Property(p => p.OrderDate).HasColumnType("datetimeoffset"); // Этот тип данных почему-то не хочет создавать
-
             modelBuilder.Entity<Product>()
                 .HasMany(p => p.CategoryProducts)
                 .WithRequired(cp => cp.Product)

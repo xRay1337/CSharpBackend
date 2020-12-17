@@ -28,7 +28,7 @@ namespace ShopEntityFramework
 
                 foreach (var s in spending)
                 {
-                    Console.WriteLine($"Сумма покупок: {s.Amount.ToString().PadLeft(7, '0')} р. {s.LastName}");
+                    Console.WriteLine($"Сумма покупок: {s.Amount:00000000} р. {s.LastName}");
                 }
 
                 Console.WriteLine();
@@ -42,7 +42,7 @@ namespace ShopEntityFramework
 
                 foreach (var s in salesByCategory)
                 {
-                    Console.WriteLine($"Кол-во продаж: {s.Count.ToString().PadLeft(7, '0')}\t{s.Name}");
+                    Console.WriteLine($"Кол-во продаж: {s.Count:00000000}\t{s.Name}");
                 }
             }
 
